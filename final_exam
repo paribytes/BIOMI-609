@@ -1,0 +1,9 @@
+#Final Exam
+
+1. Read the paper by Lohman et al., 2017 (https://doi.org/10.1111/mec.14234Links to an external site.), where they use RNAseq analyses to understand changes in gene expression in "transplanted" stickleback fish from "lake" versus "stream" environments. I have provided you with the raw read counts from this study (robertsRTCounts.csv). Perform statistical analyses to test differentially expressed genes between the lake and stream transplants, correct for multiple testing - do you recover any interesting genes from your analyses? All outlier gene accession ID's can be searched against the ENSEMBL database. Make sure to include your R code, output of your statistical analyses - 25 points.
+ 
+
+2. Pick a "good" hmpox assembly from Midterm 1 that you generated - say the best one as determined from your QUAST results. Annotate this genome using a tool of your choice - AUGUSTUS (you can either install AUGUSTUS on your JetStream2 machine, or run it on Galaxy), https://www.gensas.org/Links to an external site. (it's free, you just need to create an account), or https://github.com/ncbi/vadrLinks to an external site. (or some other platform). Thereon, create a JBrowse instance for your annotated genome. Submit the annotation (as a GFF/GFF3), and include a link to your JBrowse instance (25 points).
+ 
+
+3. Pick a predicted protein from your annotation above - choose something preferably "small" (i.e. no more than a 100-200 or so amino acids). Predict the structure of this protein using (a) Chou-Fasman method, and (b) homology modeling. You can use web-servers for both these. Submit your results as a Jmol file, or even a screenshot/image should do. (25 points)
