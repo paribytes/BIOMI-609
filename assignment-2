@@ -1,0 +1,13 @@
+Assignment 2 - Write your own Suffix Array based algorithm for read search
+
+For this assignment, you will write code to (1) take an input genome as a FASTA file, (2) construct a suffix array/tree from it, (3) take a read as input from a FASTA file, and (4) print all positions where that read occurs in the genome using the bisection algorithm.
+
+There are several ways to approach this, but the simplest is something like this in Python (courtesy https://stackoverflow.com/questions/54642311/function-for-suffix-array-pythonLinks to an external site.).
+
+s = 'banana' #read the genome string
+
+sa = sorted([s[i:] for i in range(len(s))]) #construct the suffix array library
+
+Note what it’s doing – iterating over 1 – length of the string s; then sorting the array. This will give you the suffix array directly. But note that this is not very memory efficient if you have a large genome. So it might be easier to just directly store the sorted suffix array indices instead. I’ll let you get creative with this!
+
+Please submit your code, and output file with all indices (locations of match) for the input files provided (you'll find this under Assignments - Assignment2_refgenome.fasta, Assignment2_read.fasta).
