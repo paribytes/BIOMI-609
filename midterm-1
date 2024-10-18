@@ -1,0 +1,41 @@
+#Midterm 1
+
+1. Each one of you have been assigned a separate set of hMPX genomes - you'll find these accession lists under Assignment Files->Midterm1; to (a) map back to the reference genome using bwa-mem2, then (b) call variants with respect to the reference genome using samtools. You will complete this task and submit the code used to run these (please think of putting each individual run in a loop in Python3, or Unix), and the VCF file generated at the end with your exam. Just name your code as Q1.py or something like that, and the VCF file with your Lastname_hmpox.vcf (50 points)
+
+You will pick the accession file based on the starting letters of your last name:
+
+Ah, Ak - Africa1.txt
+
+Ar - Africa2.txt
+
+Be, Cz - Germany1.txt
+
+Da - Germany2.txt
+
+Ha, Ho - Portugal1.txt
+
+Ja, Jo - Portugal2.txt
+
+Kh - Portugal3.txt
+
+Le - Portugal4.txt
+
+Ma, Mo - USA1.txt
+
+Ol - USA2.txt
+
+Ro - USA3.txt
+
+Sha - Spain1.txt
+
+Shi - Spain2.txt
+
+Ta - Spain3.txt
+
+Yo - Spain4.txt
+
+Za - Spain5.txt
+
+2. You will benchmark the performance of 3 different genome assemblers - Velvet, SPAdes, and Unicycler in assembling the same hMPX genome (just pick one from Q. 1), with same kmer length. Compare the final assemblies using QUAST against the monkeypox reference genome and report all summary statistics that help you compare - please write a paragraph describing your results (recall the 3 C's?). You’re also welcome to compare things like total time taken for the run, memory usage, etc. Get creative! Please submit the code used to run the tools as Q2.py or Q2.sh, along with your QUAST output HTML file saved as Q2.html (50 points)
+
+ 
