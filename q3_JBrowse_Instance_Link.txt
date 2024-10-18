@@ -1,0 +1,4 @@
+https://usegalaxy.org/api/datasets/f9cad7b01a4721353610bd70d7eba8a6/display?to_ext=html
+
+
+#1.g3 FASTA sequence from q3_Galaxy17-[Augustus_on_data_4__Protein_sequence] was picked for Chou-Fasman protein prediction as well as Homology modeling.

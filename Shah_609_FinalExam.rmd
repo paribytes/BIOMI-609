@@ -1,0 +1,131 @@
+---
+title: "Shah_609_FinalExam"
+author: "Priyanshi Shah"
+date: "2023-05-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r LoadingData}
+
+rnaDesign <- read.csv("robertsRTDesign.csv", header = TRUE, row.names = 1)
+head(rnaDesign)
+summary(rnaDesign)
+
+counts <- read.csv("robertsRTCounts.csv", header = TRUE, row.names = 1)
+head(counts)
+dim(counts)
+#View(counts) #Just checking out the data
+
+#change the names of the samples in the counts matrix
+names(counts) <- sub("R1_001.fastq.trim.sam.counts","",names(counts))
+names(counts) <- sub("_.{12}","", names(counts), perl = TRUE)
+```
+
+```{r DataFiltering}
+# Create example data frame
+#Removing all the columns that start with a "C" (C= control here, and keeping all other columns that are for "L"ake and "S"tream samples)
+df <- data.frame(counts)
+df <- df[, !grepl("^C", colnames(df))]
+
+#View(df) #Checking out the data
+
+# Select columns starting with "L"ake
+L_cols <- grep("^L", colnames(df), value = TRUE)
+lake <- df[L_cols]
+
+# Select columns starting with "S"tream
+S_cols <- grep("^S", colnames(df), value = TRUE)
+stream <- df[S_cols]
+
+
+# Convert list to vector
+lake1 <- unlist(lake)
+stream1 <- unlist(stream)
+lake_clean = na.omit(lake)
+stream_clean = na.omit(stream)
+
+```
+
+
+
+```{r StatisticalAnalysis}
+
+# t-test between groups of lake and stream fishes
+ttest <- t.test(lake_clean, stream_clean)
+ttest
+
+#Based on the t.test results, we can conclude that there is a significant difference in means between the lake_clean and stream_clean datasets, and that the mean of the stream_clean dataset is higher than the mean of the lake_clean dataset.
+
+```
+
+```{r CorrectionForMultipleTesting}
+dim(lake_clean) #27 columns
+dim(stream_clean) #35 columns
+
+#Bonferroni adjusted p-values:
+lake_clean_bf <- unlist(lake_clean[,1:27])
+p.adjust(lake_clean_bf, method = "bonferroni")
+
+stream_clean_bf <- unlist(stream_clean[,1:35])
+p.adjust(stream_clean_bf, method = "bonferroni")
+
+#Sequential Bonferroni (also called the Holm-Bonferroni method) adjusted p-values:
+lake_clean_sbf <- unlist(lake_clean[,1:27])
+p.adjust(lake_clean_sbf, method = "holm")
+
+stream_clean_sbf <- unlist(stream_clean[,1:35])
+p.adjust(stream_clean_sbf, method = "holm")
+
+#FDR
+
+lake_clean_fdr <- unlist(lake_clean[,1:27])
+p.adjust(lake_clean_fdr, method = "fdr")
+
+stream_clean_fdr <- unlist(stream_clean[,1:35])
+p.adjust(stream_clean_fdr, method = "fdr")
+
+```
+
+
+
+```{r LowestPVals}
+
+lake_clean_bf.sorted = lake_clean_bf[order(lake_clean_bf)]
+stream_clean_bf.sorted = stream_clean_bf[order(stream_clean_bf)]
+
+# Look at the 1000 lowest p-values
+lake_clean_bf.sorted[1:1000]
+stream_clean_bf.sorted[1:1000]
+
+lake_clean_sbf.sorted = lake_clean_sbf[order(lake_clean_sbf)]
+stream_clean_sbf.sorted = stream_clean_sbf[order(stream_clean_sbf)]
+
+lake_clean_sbf.sorted[1:1000]
+stream_clean_sbf.sorted[1:1000]
+
+lake_clean_fdr.sorted = lake_clean_fdr[order(lake_clean_fdr)]
+stream_clean_fdr.sorted = stream_clean_fdr[order(stream_clean_fdr)]
+
+lake_clean_fdr.sorted[1:1000]
+stream_clean_fdr.sorted[1:1000]
+
+```
+
+```{r DifferentiallyExpressedGenes}
+
+x<-lake_clean[lake_clean < 0.01]
+y<-stream_clean[stream_clean < 0.01]
+
+x.sorted = x [order(x)]
+y.sorted = y [order(y)]
+
+intersect(names(x),names(y))
+```
+
+
+I used the intersect command to find out genes that are differentially expressed in lake and stream stickleback, but I found none. 
